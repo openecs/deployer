@@ -1,0 +1,46 @@
+---
+# This playbook is use to control and manage iotms lifecycle
+# Usage:
+# ansible-playbook -i inventories/local/hosts --private-key=~/.ssh/id_rsa -u vagrant --tags start iotms-controller.yml --limit app01
+
+# Application installation
+- hosts: iotms
+  become: yes
+  gather_facts: yes
+  strategy: linear
+  serial: 1
+  
+  vars:
+    app_name: iotms
+    app_owner: openecs
+
+  tasks:
+    - name: start service
+      systemd:
+        daemon_reload: yes 
+        state: started
+        name: "{{ app_name }}"
+      tags:
+        - start
+
+    - name: restart service
+      systemd:
+        daemon_reload: yes
+        state: restarted
+        name: "{{ app_name }}"    
+      tags:
+        - restart      
+
+    - name: stop service
+      systemd:
+        state: stopped
+        name: "{{ app_name }}"
+      tags:
+        - stop
+
+    - name: wait for the service start or restart
+      pause:
+        seconds: 30
+      tags:
+        - start
+        - restart

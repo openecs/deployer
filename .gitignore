@@ -1,0 +1,14 @@
+# Ignore Eclipse project
+.project
+.pydevproject
+
+# Ingore files
+*.log
+*.retry
+
+# Ignore Vagrant data
+.vagrant
+
+# Ignore files
+.DS_Store
+*~
