@@ -40,7 +40,7 @@
 
     - name: wait for the service start or restart
       pause:
-        seconds: 30
+        seconds: 10
       tags:
         - start
         - restart

@@ -34,5 +34,5 @@
         state: present
 
   roles:
-  #    - { role: openjdk, openjdk_version: 11.0.2, java_home: /apps/java }
+      - { role: openjdk, openjdk_version: 11.0.2, java_home: /apps/java }
       - { role: openecs_iotms, app_version: 0.1.0 }    

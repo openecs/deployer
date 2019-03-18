@@ -26,16 +26,16 @@
 - name: change openjdk owner 
   file:
     path: "{{openjdk_home}}"
-    owner: "{{ app_owner | default('root')}}"
-    group: "{{ app_group | default('root')}}"
+    owner: "{{ openjdk_owner | default('root')}}"
+    group: "{{ openjdk_group | default('root')}}"
     recurse: yes  
   when: openjdk.stat.exists == false
 
 - name: create a java home symlink 
   file:
-    path: "/usr/java/jdk-11"
+    path: "/usr/java"
     src: "{{openjdk_home}}/jdk-{{openjdk_version}}"
-    owner: "{{ app_owner | default('root')}}"
-    group: "{{ app_group | default('root')}}"
+    owner: "{{ openjdk_owner | default('root')}}"
+    group: "{{ openjdk_group | default('root')}}"
     state: link
 #  when: openjdk.stat.exists == false   

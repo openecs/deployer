@@ -48,14 +48,14 @@
   
 - name: run the application as service
   template:
-    src: alfred.service.j2
+    src: "{{app_name}}.service.j2"
     dest: /etc/systemd/system/{{app_name}}.service
 
-- name: set cluster group name
-  lineinfile:
-    path: "{{app_dest_dir}}/conf/alfred.conf"
-    regexp: "^( *)group.name( *)=(.*)$"
-    line: "group.name={{alfred_group_name}}"
+#- name: set cluster group name
+#  lineinfile:
+#    path: "{{app_dest_dir}}/conf/{{app_name}}.conf"
+#    regexp: "^( *)group.name( *)=(.*)$"
+#    line: "group.name={{app_group_name}}"
 
 - name: restart the service
   systemd:
