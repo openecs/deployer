@@ -1,5 +1,7 @@
 ---
 # defaults file for openecs_iotm
+# openecs github download url:
+# https://github.com/openecs/iotms/releases/download/{{app_version}}/{{app_name}}-{{app_version}}.zip
 
 app_env: local
 app_name: iotms
