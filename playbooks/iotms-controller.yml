@@ -13,6 +13,7 @@
   vars:
     app_name: iotms
     app_owner: openecs
+    app_port: 8090
 
   tasks:
     - name: start service
@@ -39,8 +40,8 @@
         - stop
 
     - name: wait for the service start or restart
-      pause:
-        seconds: 10
+      wait_for:
+        port: "{{ app_port }}"
       tags:
         - start
         - restart
