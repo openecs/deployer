@@ -1,10 +1,11 @@
 - name: install the required os packages
   apt:
-    update_cache: no
-    name: "{{ packages }}"
-  vars:
-    packages:
-      - unzip
+    update_cache: yes
+    name: "{{ item }}"
+    state: present
+  loop:
+    - unzip
+    - openjdk-8-jdk
 
 - name: check if the application version is already installed
   stat:
@@ -16,27 +17,27 @@
     path: "{{app_src_dir}}"
     state: directory
     recurse: yes    
-  when: app_facts.stat.exists == false
+#  when: app_facts.stat.exists == false
 
 - name: create the application version directory if not exist 
   file:
     path: "{{app_dest_dir}}"
     state: directory
     recurse: yes  
-  when: app_facts.stat.exists == false
+#  when: app_facts.stat.exists == false
 
 - name: download the package to the distribution directory
   get_url:
     url: "{{app_pkg_url}}"
     dest: "{{app_src_dir}}/{{app_pkg_name}}"
-  when: app_facts.stat.exists == false
+#  when: app_facts.stat.exists == false
 
 - name: unpackage
   unarchive:
     src: "{{app_src_dir}}/{{app_pkg_name}}"
     dest: "{{app_dest_dir}}"
     remote_src: yes
-  when: app_facts.stat.exists == false
+#  when: app_facts.stat.exists == false
 
 - name: change application owner 
   file:
@@ -44,7 +45,7 @@
     owner: "{{ app_owner | default('root')}}"
     group: "{{ app_group | default('root')}}"
     recurse: yes
-  when: app_facts.stat.exists == false
+#  when: app_facts.stat.exists == false
   
 - name: run the application as service
   template:

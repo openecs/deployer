@@ -20,6 +20,7 @@
   vars:
     app_owner: openecs
     app_group: openecs
+    github_user: openecs
         
   pre_tasks:
     - name: create the appliction group if not present
@@ -34,5 +35,4 @@
         state: present
 
   roles:
-      - { role: openjdk, openjdk_version: 11.0.2, java_home: /apps/java }
-      - { role: openecs_iotms, app_version: 0.1.0 }    
+      - { role: openecs_iotms, app_version: 0.4.0 }    

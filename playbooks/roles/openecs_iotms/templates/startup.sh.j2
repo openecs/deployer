@@ -1,5 +1,5 @@
 
 #!/bin/bash
 
-JAVA_HOME=/usr/java
+JAVA_HOME=$(dirname $(dirname $(readlink -f $(which javac))))
 $JAVA_HOME/bin/java -Xmx1g -jar iotms-{{app_version}}.jar
